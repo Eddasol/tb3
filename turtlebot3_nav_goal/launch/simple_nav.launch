@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="turtlebot3_nav_goal" type="simple_nav_goal_py.py" name="simple_nav_goal" />
+</launch>
