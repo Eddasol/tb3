@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="map_name" default="$house_indoor"/>
+
+  <!-- Navigation -->
+  <include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch">
+      <arg name="map_file" default="$(find tb3_mapping)/maps/$(arg map_name).yaml"/>
+  </include>
+</launch>
