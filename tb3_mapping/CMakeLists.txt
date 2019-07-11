@@ -104,7 +104,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES turtlebot3_mapping
+#  LIBRARIES tb3_mapping
 #  CATKIN_DEPENDS amcl map_server move_base
 #  DEPENDS system_lib
 )
@@ -122,7 +122,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/turtlebot3_mapping.cpp
+#   src/${PROJECT_NAME}/tb3_mapping.cpp
 # )
 
 ## Add cmake target dependencies of the library

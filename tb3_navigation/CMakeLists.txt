@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(turtlebot3_nav_goal)
+project(tb3_navigation)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -100,7 +100,7 @@ find_package(catkin REQUIRED)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES turtlebot3_nav_goal
+#  LIBRARIES tb3_navigation
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -118,7 +118,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/turtlebot3_nav_goal.cpp
+#   src/${PROJECT_NAME}/tb3_navigation.cpp
 # )
 
 ## Add cmake target dependencies of the library
