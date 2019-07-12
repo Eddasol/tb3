@@ -1,0 +1,8 @@
+<launch> 
+  <!-- Read navigation goals from user and publish to topic-->
+  <node pkg="tb3_navigation_goal" type="read_user_input.py" name="read_user_input"/>
+
+  <!-- Read navigation goals from topic and set to move_base-->
+  <node pkg="tb3_navigation_goal" type="set_nav_goal.py" name="set_nav_goal"/>
+
+</launch>
