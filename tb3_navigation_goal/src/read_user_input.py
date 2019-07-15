@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 import rospy
+import sys, select, os
 from move_base_msgs.msg import MoveBaseGoal
 
-import sys, select, os
 if os.name == 'nt':
   import msvcrt
 else:
@@ -15,10 +15,10 @@ Control Your TurtleBot3!
 ---------------------------
 n to choose new desired position
 """
-
 e = """
 Communications Failed
 """
+
 
 def is_int(num):
     try:
@@ -26,6 +26,7 @@ def is_int(num):
         return True
     except:
         return False
+
 
 def getKey():
     if os.name == 'nt':
@@ -41,21 +42,12 @@ def getKey():
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
     return key
 
-settings = None
-def init_key_input():
-    global settings
-    if os.name != 'nt':
-        settings = termios.tcgetattr(sys.stdin)
-
-
-def end_key_input():
-    if os.name != 'nt':
-        termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
 
 def retreive_number(end_key=' '):
     number = 0
     num_decimals = -1
-    while(1):
+    sign = 1
+    while not rospy.is_shutdown():
         key = getKey()
         if is_int(key):
             if num_decimals == -1:
@@ -63,16 +55,18 @@ def retreive_number(end_key=' '):
             else:
                 num_decimals += 1
                 number += int(key)*10**(-(num_decimals))
-        elif key == end_key:
-            break
         elif key == '.':
             num_decimals = max(num_decimals, 0)
-        elif key == '\x03':
+        elif key == '-':
+            sign = -1
+        elif key == end_key or key == '\n' or key == "\n":
             break
         else:
             continue
-        print(number)
-    return number
+        print(sign*number)
+
+    return sign*number
+
 
 def get_and_transmit_corrdinates(pub):
     '''
@@ -81,7 +75,7 @@ def get_and_transmit_corrdinates(pub):
     status = 0
     try:
         print msg
-        while(1):
+        while not rospy.is_shutdown():
             key = getKey()
             if key == 'n':
                 # Get desired x, y position and publishes the coordinates
@@ -109,13 +103,26 @@ def get_and_transmit_corrdinates(pub):
     except:
         print e
 
+    finally:
+
+        # Upon exit it goes back to predecides position (ex: charging station)
+        goal = MoveBaseGoal()
+        goal.target_pose.header.frame_id = "map"
+        goal.target_pose.header.stamp = rospy.Time.now()
+        goal.target_pose.pose.position.x = -3
+        goal.target_pose.pose.position.y = 1
+        goal.target_pose.pose.orientation.w = 1.0
+        pub.publish(goal)
+
+
 
 if __name__=="__main__":
-    init_key_input()
+    if os.name != 'nt':
+        settings = termios.tcgetattr(sys.stdin)
 
-    rospy.init_node('turtlebot3_navigation_goals')
+    rospy.init_node('user_input')
     pub = rospy.Publisher('goals', MoveBaseGoal, queue_size=10)
     get_and_transmit_corrdinates(pub)
-    end_key_input()
 
-
+    if os.name != 'nt':
+        termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)

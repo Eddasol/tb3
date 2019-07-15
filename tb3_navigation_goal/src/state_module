@@ -1,0 +1,58 @@
+#Pseudo code idè
+
+def init():
+  init_service_battery_module() # sends if we have time to execute a command or if we should go home and charge
+  init_subscriber_battery() # sends battery level
+  init_subscriber_navigation_goals() # sends navigation goals given as user input
+
+
+def main():
+  while not rospy.is_shutdown():
+
+    switch(state):
+    case(GO_HOME_TO_CHARGE):
+      if is_home():
+        start_charging()
+        state = CHARGING
+        break
+
+    case(CHARGING):
+      if is_battery_full():
+        end_charging()
+        state = WAITING
+        break
+
+    case(WAITING):
+      if pending_nav_goal != None:
+        set_nav_goal()
+        state = DRIVING
+      elif battery_level() == LOW:
+        start_charging()
+        state = CHARGING
+      elif should_patrol():
+        set_next_patrol_goal()
+        state = PATROLING
+        break
+
+    case(PATROLING)
+    if not is_battery_sufficient():
+      go_home()
+      state = GOHOME_TO_CHARGE
+      break
+    elif pending_nav_goal != None:
+      set_nav_goal()
+      state = DRIVING
+      break
+
+    if is_goal_reached():
+      save_result()
+      if should_patrol():
+        set_next_patrol_goal()
+      else:
+        state=WAITING
+
+    case(DRIVING):
+      if not is_battery_sufficient():
+        go_home()
+        state = GO_HOME_TO_CHARGE
+      elif is_goal_reached():

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="tb3_navigation_goal" type="simple_nav_goal.py" name="simple_nav_goal" />
+</launch>
