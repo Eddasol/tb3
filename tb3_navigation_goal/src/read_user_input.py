@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-
+import json
 import rospy
 import sys, select, os
 from move_base_msgs.msg import MoveBaseGoal
+from std_msgs.msg import String
 
 if os.name == 'nt':
   import msvcrt
@@ -18,6 +19,11 @@ n to choose new desired position
 e = """
 Communications Failed
 """
+
+
+def print_dictionary(msg):
+    loaded_dictionary = json.loads(msg.data)
+
 
 
 def is_int(num):
@@ -121,8 +127,10 @@ if __name__=="__main__":
         settings = termios.tcgetattr(sys.stdin)
 
     rospy.init_node('user_input')
-    pub = rospy.Publisher('goals', MoveBaseGoal, queue_size=10)
+    pub = rospy.Publisher('user_input', MoveBaseGoal, queue_size=10)
+    rospy.Subscriber("goal_control_state", String, print_dictionary)
     get_and_transmit_corrdinates(pub)
+
 
     if os.name != 'nt':
         termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)

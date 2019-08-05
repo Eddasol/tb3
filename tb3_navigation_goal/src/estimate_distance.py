@@ -24,7 +24,7 @@ def path_distance(path, increment_gain = 5):
 	return length
 
 def callback(path):
-	print("Acc:", path_distance(path, increment_gain = 1), "Est:",path_distance(path, increment_gain = 5))
+	print("Acc:", path_distance(path, increment_gain = 1), "Est:", path_distance(path, increment_gain = 5))
 
 
 if __name__ == '__main__':

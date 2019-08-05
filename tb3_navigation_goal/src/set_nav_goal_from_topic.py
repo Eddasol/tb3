@@ -2,17 +2,20 @@
 import roslib
 import rospy
 import actionlib
+import math
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
+from geometry_msgs.msg import PoseWithCovarianceStamped, Twist
+from std_msgs.msg import String
 from threading import Semaphore
 from rospy import loginfo as rosinfo
+from time import time as Time
 #roslib.load_manifest('tb3_navigation_goals')
 
-NO_GOAL = 0
-MOVING_TO_GOAL = 1
-client = None
-state = NO_GOAL
-available_goal = Semaphore(value=0)
 
+client = None
+state = "normal"
+available_goal = Semaphore(value=0)
+	
 
 
 def callback(goal):
@@ -28,12 +31,12 @@ def callback(goal):
 
 
 
-
 if __name__ == '__main__':
     # Initializing
     rospy.init_node('set_nav_goal')
     rospy.Subscriber("goals", MoveBaseGoal, callback)
     client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
+
 
     # Wait for connection
     while (not client.wait_for_server(rospy.Duration.from_sec(5.0))) and not rospy.is_shutdown():

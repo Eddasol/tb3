@@ -1,0 +1,8 @@
+<launch>
+  <arg name="filepath" default="$(find tb3_mapping)/maps/office_room_corners.txt"/>
+
+  <!-- Read navigation goals from user and publish to topic -->
+  <node pkg="tb3_navigation_goal" type="test.py" name="test" output="screen" args="$(arg filepath)">   
+  </node>
+
+</launch>

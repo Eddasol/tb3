@@ -5,7 +5,7 @@ import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 #from rospy.Time import now
 from rospy import loginfo as rosinfo
-roslib.load_manifest('turtlebot3_nav_goal')
+
 
 
 
