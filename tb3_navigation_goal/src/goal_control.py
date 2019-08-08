@@ -103,8 +103,9 @@ if __name__ == '__main__':
     # Give feedback to user
     while not rospy.is_shutdown():
 	# Wait for a goal
-	while current_priority == -1:
+	while current_priority == -1 and not rospy.is_shutdown():
 	    sleep(0.5)
+	    send_state(WAITING)
 
         client.wait_for_result()
 

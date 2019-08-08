@@ -34,7 +34,7 @@ def callback(goal):
 if __name__ == '__main__':
     # Initializing
     rospy.init_node('set_nav_goal')
-    rospy.Subscriber("goals", MoveBaseGoal, callback)
+    rospy.Subscriber("user_input", MoveBaseGoal, callback)
     client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
 
 
