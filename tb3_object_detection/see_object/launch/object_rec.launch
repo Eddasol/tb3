@@ -1,0 +1,21 @@
+<launch>
+
+  <param name="use_sim_time" value="true" />
+
+  <!-- Read navigation goals from user and publish to topic -->
+  <node pkg="find_object_2d" type="find_object_2d" name="find_object_d">
+    <remap from="image" to="/raspicam_node/image"/>
+  </node>
+
+  <node name="republish" type="republish" pkg="image_transport" output="screen"         
+     args="compressed in:=/raspicam_node/image raw out:=/raspicam_node/image" > 
+  </node>
+
+  <!-- Read navigation goals from user and publish to topic -->
+  <node pkg="see_object" type="find_obj.py" name="find_obj"> output="screen" >
+  </node>
+
+</launch>
+
+
+
