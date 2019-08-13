@@ -12,7 +12,7 @@
   </node>
 
   <!-- Read navigation goals from user and publish to topic -->
-  <node pkg="see_object" type="find_obj.py" name="find_obj"> output="screen" >
+  <node pkg="see_object" type="find_obj.py" name="find_obj" output="screen" >
   </node>
 
 </launch>

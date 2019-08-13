@@ -59,7 +59,6 @@ def save_image(msg):
 
 	    sound_msg = Sound()
 	    sound_msg.value=0
-	    print('publishing msg')
             sound_pub.publish(sound_msg)
 
    
