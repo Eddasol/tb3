@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
   <!-- Read navigation goals from user and publish to topic -->
   <node pkg="tb3_navigation_goal" type="read_user_input.py" name="read_user_input" output="screen"/>
@@ -5,4 +6,8 @@
   <!-- Read navigation goals from topic and set to move_base -->
   <node pkg="tb3_navigation_goal" type="set_nav_goal_from_topic.py" name="set_nav_goal" output="screen"/>
 
+  <!-- Goal control node -->
+  <node pkg="tb3_navigation_goal" type="goal_control.py" name="goal_control_node" output="screen">
+    <param name="user_input_topic" value="goals" />
+  </node>
 </launch>

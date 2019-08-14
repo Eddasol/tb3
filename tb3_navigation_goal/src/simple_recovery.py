@@ -8,9 +8,7 @@ DORMANT = 0
 ACTIVE = 1
 state = DORMANT
 
-is_desperate = False
-n = 230
-distance_desperate_threshold = 0.8
+n = 230 
 distance_threshold = 1.5 
 max_speed_threshold = 2.5
 max_speed = 1

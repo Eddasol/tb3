@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Goal control node -->
+  <node pkg="tb3_navigation_goal" type="goal_control.py" name="goal_control_node" output="screen">
+    <param name="user_input_topic" value="goals" />
+  </node>
+
+  <!-- Patrol node that sends a sequence of goals -->
+  <node pkg="tb3_navigation_goal" type="patrol_goal.py" name="patrol_goal_node"/>
+</launch>

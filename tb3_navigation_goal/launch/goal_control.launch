@@ -1,7 +1,0 @@
-<launch>
-
-  <node pkg="tb3_navigation_goal" type="goal_control.py" name="goal_control_node" output="screen">
-    <param name="user_input_topic" value="goals" />
-  </node>
-
-</launch>

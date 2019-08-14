@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# license removed for brevity
+''' Alternates between on and off sound '''
 import rospy
 from turtlebot3_msgs.msg import Sound
 

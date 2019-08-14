@@ -51,7 +51,7 @@ def save_image(msg):
  
             print("Saved image!")
             # Save your OpenCV2 image as a jpeg 
-	    image_name = "catkin_ws/src/see_object/images/object" + str(newest)+".jpg"
+	    image_name = "/home/student/catkin_ws/src/tb3/tb3_object_detection/see_object/images/object" + str(newest)+".jpg"
             cv2.imwrite(image_name, cv2_img)
             #store object nr to compare with new one 
             last = newest
