@@ -5,6 +5,9 @@ import sys, select, os
 from move_base_msgs.msg import MoveBaseGoal
 from std_msgs.msg import String
 
+''' Takes in user input and sents goal to "user_input" topic '''
+
+
 if os.name == 'nt':
   import msvcrt
 else:
@@ -65,12 +68,11 @@ def retreive_number(end_key=' '):
             num_decimals = max(num_decimals, 0)
         elif key == '-':
             sign = -1
-        elif key == end_key or key == '\n' or key == "\n":
+        elif key == end_key:
             break
         else:
             continue
         print(sign*number)
-
     return sign*number
 
 

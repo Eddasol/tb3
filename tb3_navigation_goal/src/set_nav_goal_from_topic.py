@@ -9,13 +9,12 @@ from std_msgs.msg import String
 from threading import Semaphore
 from rospy import loginfo as rosinfo
 from time import time as Time
-#roslib.load_manifest('tb3_navigation_goals')
 
+''' Sends the goal in "user_input" topic to move_base '''
 
 client = None
 state = "normal"
-available_goal = Semaphore(value=0)
-	
+available_goal = Semaphore(value=0)	
 
 
 def callback(goal):
@@ -27,8 +26,6 @@ def callback(goal):
     client.send_goal(goal)
 
     available_goal.release()
-
-
 
 
 if __name__ == '__main__':

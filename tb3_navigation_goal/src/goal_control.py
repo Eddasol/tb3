@@ -10,15 +10,13 @@ from actionlib_msgs.msg import GoalID
 from std_msgs.msg import String
 from rospy import loginfo as rosinfo
 from time import time, sleep
-
+'''
+Reads from topics with different priorities and sends the goal with highest priority to move_base
+'''
 
 ## CONSTANTS ##
 # Topics
 LOW_BATTERY_TOPIC = "batterymodule_goal"
-'''if rospy.has_param('user_input_topic'):
-	USER_INPUT_TOPIC = rospy.get_param("user_input_topic") 
-else:
-    print("error")'''
 USER_INPUT_TOPIC = "user_input"
 PATROL_TOPIC = "patrol_goal"
 STATE_TOPIC = "goal_control_state"
@@ -48,7 +46,6 @@ def send_state(state):
     ## state = {waiting, sending_goal, driving, goal_success, goal_abort}
     info = {"priority": current_priority, "state": state}
     encoded_data_string = json.dumps(info)
-    print("Publishing:", encoded_data_string, "of type:", type(encoded_data_string))
     pub.publish(encoded_data_string)
 	
 
