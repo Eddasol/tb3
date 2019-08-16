@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #This code recognizes objects and takes a picture of it and save it in a map on turtlebot3
 #I made a variabel called "last" that saves the last object being captured so that the camera will only take picture of the object if it is different from the last object seen. This is to avoid taking endless pictures of the same object, but only one picture instead.  
 
@@ -17,7 +18,7 @@
 #After installing run the following command on turtlebot:
 #roslaunch turtlebot3_bringup turtlebot3_rpicamera.launch
 
-#!/usr/bin/env python
+
 import rospy
 from std_msgs.msg import Float32MultiArray
 import rospy
